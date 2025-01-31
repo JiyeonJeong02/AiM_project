@@ -11,7 +11,7 @@
     <td align="center"><a href="https://github.com/yonggaljjw"><b>조진원</b></td>
     <td align="center"><a href="https://github.com/JiyeonJeong02"><b>정지연</b></td>
     <td align="center"><a href="https://github.com/rhrjsdn3853"><b>고건우</b></td>
-    <td align="center"><a href="https://github.com/kimnagyeong99"><b>이환희</b></td>
+    <td align="center"><a href="https://www.blaybus.com/project/1152/home"><b>이환희</b></td>
   </tr>
   <tr>
     <td align="center"><b>백엔드 엔지니어</b></td>
