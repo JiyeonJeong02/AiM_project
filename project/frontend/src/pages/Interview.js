@@ -7,15 +7,14 @@ const Interview = () => {
     <div className="interview-container">
       {/* AI면접 소개 섹션 */}
       <div className="interview-header">
-        <h1>AI면접</h1>ㅁ
+        <h1>AI면접</h1>
         <p>
           AI면접은 기본면접/AI게임/심층면접 등 총 6단계로 구성되며 대략 총 20분 ~ 30분 가량 소요됩니다.
           <br />
           시작하기 전에 앞서 마이크/캠장치 등의 사전준비를 끝낸 후 시작하시기 바랍니다.
         </p>
         <Link to="/start-interview">
-          <button className="start-button">AI면접 바로가기</button>
-        </Link>
+  <button className="start-button">AI면접 바로가기</button></Link>
       </div>
 
       {/* 카드형 UI 섹션 */}

@@ -14,6 +14,7 @@ project/frontend/build
 # misc
 project/frontend/.DS_Store
 project/frontend/.env.local
+project/frontend/.env
 project/frontend/.env.development.local
 project/frontend/.env.test.local
 project/frontend/.env.production.local
