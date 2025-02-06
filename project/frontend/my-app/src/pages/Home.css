@@ -1,0 +1,91 @@
+/* ✅ 기본 설정 (페이지 전체 스타일) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+
+  
+  /* ✅ 섹션 제목 */
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* ✅ 카드 컨테이너 (가운데 정렬) */
+  .cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    width: 90%;
+  }
+  
+  /* ✅ 개별 카드 디자인 */
+  .card {
+    background: white;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  /* ✅ 카드 헤더 (색상 변경 가능) */
+  .card-header {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+  }
+  
+  /* ✅ 카드 본문 */
+  .card-body {
+    padding: 15px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* ✅ 카드 이미지 */
+  .card-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* ✅ 카드 버튼 */
+  .card-footer {
+    padding: 15px;
+  }
+  
+  .action-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 5px;
+  }
+  
+  .action-button:hover {
+    opacity: 0.8;
+  }
+  
+  /* ✅ 반응형 디자인 */
+  @media (max-width: 768px) {
+    .cards-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card {
+      width: 90%;
+      max-width: 350px;
+    }
+  }
+  
