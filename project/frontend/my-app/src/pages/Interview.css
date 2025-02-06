@@ -1,0 +1,112 @@
+/* ✅ 모든 여백 제거 및 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+    background-color: #000428; /* 배경색 고정 */
+  }
+  
+  /* ✅ 전체 화면을 차지하도록 설정 */
+
+  
+  /* ✅ 헤더 섹션 중앙 정렬 */
+  .interview-header {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .interview-header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .interview-header p {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    opacity: 0.8;
+  }
+  
+  /* ✅ 버튼 중앙 정렬 */
+  .start-button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: #2563eb;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .start-button:hover {
+    background: #1d4ed8;
+  }
+  
+  /* ✅ 카드 컨테이너 정렬 문제 해결 */
+  .cards-container {
+    display: flex;
+    justify-content: center; /* 수평 정렬 */
+    align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
+    max-width: 1400px;
+    margin: 40px auto; /* 중앙 정렬 */
+    gap: 20px;
+  }
+  
+  /* ✅ 개별 카드 디자인 */
+  .card {
+    background: white;
+    color: black;
+    width: 320px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* ✅ 카드 안의 태그 디자인 */
+  .tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .tags span {
+    background: #e0e0e0;
+    padding: 7px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: black;
+  }
+  
+  /* ✅ 모바일 최적화 */
+  @media (max-width: 768px) {
+    .cards-container {
+      flex-direction: column;
+      width: 100%;
+      padding: 0 20px;
+    }
+  
+    .card {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+  
