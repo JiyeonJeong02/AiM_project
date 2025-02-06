@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import SpeechRecognitionComponent from "../components/SpeechRecognition";
-import { getInterviewResponse } from "../components/ChatGPTService";
+import { getInterviewResponse } from "../api/gptService";
 import "./InterviewSession.css";
 
 const INTERVIEW_TIME = 30; // ⏳ 답변 시간 (초)
