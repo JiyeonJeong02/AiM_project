@@ -12,8 +12,8 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/workspace
-      - ./assets:/assets
-    command : ["sh", "-c", "npm install && npm start"]
+      - /workspace/node_modules
+    command : npm start
 
   backend:
     build:
@@ -25,5 +25,4 @@ services:
       - 8000:8000
     volumes:
       - ./backend:/workspace
-      - ./assets:/assets
     command: uvicorn main:app --host 0.0.0.0 --reload
