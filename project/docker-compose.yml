@@ -1,4 +1,4 @@
-version: "3.8"
+# version: "3.8"
 
 services:
 
@@ -13,7 +13,7 @@ services:
     volumes:
       - ./frontend:/workspace
       - ./assets:/assets
-    command : npm start
+    command : ["sh", "-c", "npm install && npm start"]
 
   backend:
     build:
