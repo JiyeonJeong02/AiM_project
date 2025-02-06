@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# 프론트쪽쪽
+# 프론트
 project/frontend/node_modules/
 project/frontend/.pnp
 project/frontend/.pnp.js
@@ -8,7 +8,6 @@ project/frontend/coverage
 project/frontend/build
 project/frontend/.DS_Store
 project/frontend/.env.local
-project/frontend/.env
 project/frontend/.env.development.local
 project/frontend/.env.test.local
 project/frontend/.env.production.local
@@ -17,7 +16,7 @@ project/frontend/npm-debug.log*
 project/frontend/yarn-debug.log*
 project/frontend/yarn-error.log*
 
-# 백엔드쪽쪽
+# 백엔드
 project/backend/__pycache__/
 
 # 에어플로우
@@ -25,3 +24,6 @@ airflow/logs/
 airflow/config/
 airflow/plugins/
 airflow/dags/__pycache__/
+
+.env
+__pycache__

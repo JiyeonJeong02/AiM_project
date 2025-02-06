@@ -1,3 +1,10 @@
 fastapi
 uvicorn
+httpx
+python-dotenv
+openai
+
 numpy
+pandas
+pymysql
+sqlalchemy
