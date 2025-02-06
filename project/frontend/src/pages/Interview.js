@@ -1,37 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Interview.css"; // 스타일 적용
 
 const Interview = () => {
-  const [question, setQuestion] = useState("AI가 면접 질문을 생성합니다...");
-  const [answer, setAnswer] = useState("");
-
-  const fetchQuestion = async () => {
-    const res = await fetch("http://localhost:5000/api/interview");
-    const data = await res.json();
-    setQuestion(data.question);
-  };
-
-  const submitAnswer = async () => {
-    await fetch("http://localhost:5000/api/interview", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ answer }),
-    });
-    alert("답변이 제출되었습니다!");
-  };
-
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-xl font-bold mb-4">{question}</h1>
-      <textarea
-        className="w-full border rounded p-2"
-        rows="4"
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-        placeholder="답변을 입력하세요..."
-      />
-      <div className="mt-4">
-        <button onClick={fetchQuestion} className="bg-blue-500 text-white px-4 py-2 rounded mr-2">새 질문</button>
-        <button onClick={submitAnswer} className="bg-green-500 text-white px-4 py-2 rounded">제출</button>
+    <div className="interview-container">
+      {/* AI면접 소개 섹션 */}
+      <div className="interview-header">
+        <h1>AI면접</h1>
+        <p>
+          AI면접은 기본면접/AI게임/심층면접 등 총 6단계로 구성되며 대략 총 20분 ~ 30분 가량 소요됩니다.
+          <br />
+          시작하기 전에 앞서 마이크/캠장치 등의 사전준비를 끝낸 후 시작하시기 바랍니다.
+        </p>
+        <Link to="/start-interview">
+  <button className="start-button">AI면접 바로가기</button></Link>
+      </div>
+
+      {/* 카드형 UI 섹션 */}
+      <div className="cards-container">
+        <div className="card">
+          <h3 className="category-title">AI면접</h3>
+          <img src="https://via.placeholder.com/300" alt="AI면접" />
+          <div className="tags">
+          </div>
+        </div>
+
+        <div className="card">
+          <h3 className="category-title">이용방법 및 학습지원</h3>
+          <img src="https://via.placeholder.com/300" />
+          <div className="tags">
+
+          </div>
+        </div>
+
+        
       </div>
     </div>
   );

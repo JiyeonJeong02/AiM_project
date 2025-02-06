@@ -1,0 +1,40 @@
+.interview-start-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #2563eb, #1e3a8a);
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.start-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: white;
+    color: #2563eb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background: #f3f4f6;
+}
