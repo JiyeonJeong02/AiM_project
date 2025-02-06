@@ -63,12 +63,13 @@ body {
   padding: 15px 20px;
   color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  height:70px;
 }
 
 .navbar ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 30px;
   margin: 0;
   padding: 0;
 }

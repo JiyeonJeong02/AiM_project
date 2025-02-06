@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // ✅ 추가
 import "./Home.css"; // 스타일 적용
 
 const Home = () => {
@@ -10,21 +11,21 @@ const Home = () => {
       buttonText: "기업 정보",
       bgColor: "teal",
       imgSrc: "https://via.placeholder.com/300",
+      link: "#", // 링크 없음
     },
     {
-      title: "AI휴먼 면접",
+      title: "AI 면접",
       description:
         "AI 면접관이 진행하게 됩니다.",
-      buttonText: "AI휴먼 면접 보기",
+      buttonText: "AI 면접 보기",
       bgColor: "indigo",
       imgSrc: "https://via.placeholder.com/300",
+      link: "/interview", // ✅ 인터뷰 페이지로 이동
     },
-   
   ];
 
   return (
     <div className="home-container">
-
       <div className="cards-container">
         {sections.map((section, index) => (
           <div key={index} className="card">
@@ -45,9 +46,17 @@ const Home = () => {
 
             {/* 버튼 */}
             <div className="card-footer">
-              <button className="action-button" style={{ backgroundColor: section.bgColor }}>
-                {section.buttonText}
-              </button>
+              {section.link !== "#" ? (
+                <Link to={section.link}>
+                  <button className="action-button" style={{ backgroundColor: section.bgColor }}>
+                    {section.buttonText}
+                  </button>
+                </Link>
+              ) : (
+                <button className="action-button" style={{ backgroundColor: section.bgColor }}>
+                  {section.buttonText}
+                </button>
+              )}
             </div>
           </div>
         ))}

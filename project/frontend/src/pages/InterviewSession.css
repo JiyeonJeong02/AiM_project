@@ -1,0 +1,119 @@
+/* ✅ 컨테이너 전체 스타일 */
+.interview-session-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to right, #000428, #004e92);
+    color: white;
+    padding: 20px;
+  }
+  
+  .interview-header {
+    width: 80%;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .interview-header h1 {
+    font-size: 2rem;
+  }
+  
+  .interview-header h2 {
+    font-size: 1.2rem;
+    opacity: 0.8;
+  }
+  
+  /* ✅ 타이머 스타일 (화면 최상단 중앙) */
+.timer {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f97316;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  display: inline-block;
+}
+  
+  /* ✅ 웹캠 */
+  .video-container {
+    width: 50%;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+  
+  video {
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid white;
+  }
+  
+  /* ✅ 채팅 박스 */
+  .chat-box {
+    width: 50%;
+    max-width: 600px;
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    overflow-y: auto;
+    height: 300px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .user-msg {
+    font-weight: bold;
+    color: blue;
+  }
+  
+  .bot-msg {
+    font-weight: bold;
+    color: green;
+  }
+  
+  /* ✅ 답변하는 중 표시 */
+  .loading-msg {
+    font-weight: bold;
+    color: orange;
+    text-align: center;
+  }
+  
+  /* ✅ 유저 입력 미리보기 */
+  .user-input-preview {
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  /* ✅ "답변 완료" 버튼 */
+  .submit-button {
+    background: #38bdf8;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .submit-button:hover {
+    background: #0284c7;
+  }
+  
+  .submit-button:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+  
