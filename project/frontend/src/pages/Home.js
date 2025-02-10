@@ -10,7 +10,7 @@ const Home = () => {
         "자기소개서 작성에 필요한 기업 정보를 확인 할 수 있습니다.",
       buttonText: "기업 정보",
       bgColor: "teal",
-      imgSrc: "https://via.placeholder.com/300",
+      imgSrc: "/images/text.jpg",
       link: "#", // 링크 없음
     },
     {
@@ -19,7 +19,7 @@ const Home = () => {
         "AI 면접관이 진행하게 됩니다.",
       buttonText: "AI 면접 보기",
       bgColor: "indigo",
-      imgSrc: "https://via.placeholder.com/300",
+      imgSrc: "/images/meet.jpg",
       link: "/interview", // ✅ 인터뷰 페이지로 이동
     },
   ];
