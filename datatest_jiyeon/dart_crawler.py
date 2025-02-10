@@ -274,4 +274,4 @@ class DartCrawler:
 if __name__ == "__main__":
     crawler = DartCrawler()
     # 원하는 index의 기업만 처리
-    crawler.process_companies(start_idx=1000, end_idx=5000)
+    crawler.process_companies(start_idx=30001, end_idx=100000)
