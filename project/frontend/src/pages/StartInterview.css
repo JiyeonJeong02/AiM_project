@@ -1,6 +1,6 @@
 /* ✅ 전체 페이지 스타일 */
 .start-interview-container {
-    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,112 +1,140 @@
-/* ✅ 모든 여백 제거 및 기본 설정 */
+/* 기본 리셋 */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; /* 가로 스크롤 방지 */
-    background-color: #000428; /* 배경색 고정 */
-  }
-  
-  /* ✅ 전체 화면을 차지하도록 설정 */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html, body {
+  background: linear-gradient(135deg, #d3d0d072, #ffffff50);
   
-  /* ✅ 헤더 섹션 중앙 정렬 */
-  .interview-header {
-    width: 100%;
-    max-width: 900px;
-    text-align: center;
-    margin: 0 auto;
-  }
-  
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 전체 컨테이너 */
+.interview-container {
+ 
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* 헤더 섹션 */
+.interview-header {
+  text-align: center;
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+
+.interview-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.interview-header p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  opacity: 0.85;
+}
+
+/* 시작 버튼 */
+.start-button {
+  padding: 15px 40px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.start-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* 카드 컨테이너 */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 80%;
+  max-width: 1400px;
+  margin: 40px auto 0;
+}
+
+/* 개별 카드 */
+.card {
+  background: #fff;
+  color: #333;
+  width: 320px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.category-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* 태그 */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.tags span {
+  background: #e0e0e0;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
   .interview-header h1 {
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 2.5rem;
   }
   
   .interview-header p {
-    font-size: 1.3rem;
-    margin-top: 10px;
-    opacity: 0.8;
+    font-size: 1.1rem;
   }
   
-  /* ✅ 버튼 중앙 정렬 */
-  .start-button {
-    margin-top: 20px;
-    padding: 15px 30px;
-    background: #2563eb;
-    color: white;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .start-button:hover {
-    background: #1d4ed8;
-  }
-  
-  /* ✅ 카드 컨테이너 정렬 문제 해결 */
   .cards-container {
-    display: flex;
-    justify-content: center; /* 수평 정렬 */
-    align-items: center;
-    flex-wrap: wrap;
-    width: 80%;
-    max-width: 1400px;
-    margin: 40px auto; /* 중앙 정렬 */
-    gap: 20px;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
   }
   
-  /* ✅ 개별 카드 디자인 */
   .card {
-    background: white;
-    color: black;
-    width: 320px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-    text-align: center;
-    transition: transform 0.3s;
+    width: 100%;
+    max-width: 350px;
   }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  /* ✅ 카드 안의 태그 디자인 */
-  .tags {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-  }
-  
-  .tags span {
-    background: #e0e0e0;
-    padding: 7px 12px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    color: black;
-  }
-  
-  /* ✅ 모바일 최적화 */
-  @media (max-width: 768px) {
-    .cards-container {
-      flex-direction: column;
-      width: 100%;
-      padding: 0 20px;
-    }
-  
-    .card {
-      width: 100%;
-      max-width: 350px;
-    }
-  }
-  
+}
