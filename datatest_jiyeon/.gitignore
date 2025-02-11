@@ -3,3 +3,5 @@ downloads/
 corpCode.zip
 output/
 debug/
+
+echo "datatest_jiyeon/AiM/" >> .gitignore
