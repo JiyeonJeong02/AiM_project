@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  summarizer:
+    build: .
+    container_name: big5_summarizer
+    volumes:
+      - .:/app
+    working_dir: /app
+    env_file:
+      - .env  # ✅ .env 파일을 컨테이너에 적용
+    command: ["python", "big5_summary_connect_ELK.py"]
