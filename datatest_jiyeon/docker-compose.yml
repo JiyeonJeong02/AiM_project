@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  summarizer:
+    build: .
+    container_name: big5_summarizer
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["python", "big5_bus_info_summary.py"]
