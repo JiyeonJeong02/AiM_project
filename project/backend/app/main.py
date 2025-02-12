@@ -1,47 +1,11 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+import os
 from typing import List, Optional
-import databases
-import sqlalchemy
-from app.ChatGPTService import get_interview_response  # 기존 모듈 임포트
-
-# 데이터베이스 연결 (예: MySQL, PostgreSQL 등)
-DATABASE_URL = "mysql://ims:imsgreat1!W@221.155.195.6:3306/NCS_DB"  # 실제 환경에 맞게 수정
-database = databases.Database(DATABASE_URL)
-metadata = sqlalchemy.MetaData()
-
-# NCS 코드 테이블 정의 (컬럼 이름은 실제 스키마와 일치해야 함)
-ncs_code = sqlalchemy.Table(
-    "ncs_code",
-    metadata,
-    sqlalchemy.Column("ncsDegr", sqlalchemy.String),
-    sqlalchemy.Column("ncsLclasCd", sqlalchemy.String),
-    sqlalchemy.Column("ncsLclasCdNm", sqlalchemy.String),
-    sqlalchemy.Column("ncsMclasCd", sqlalchemy.String),
-    sqlalchemy.Column("ncsMclasCdNm", sqlalchemy.String),
-    sqlalchemy.Column("ncsSclasCd", sqlalchemy.String),
-    sqlalchemy.Column("ncsSclasCdNm", sqlalchemy.String),
-    sqlalchemy.Column("ncsSubdCd", sqlalchemy.String),
-    sqlalchemy.Column("ncsSubdCdNm", sqlalchemy.String),
-    sqlalchemy.Column("dutyCd", sqlalchemy.String)
-)
-
-# Pydantic 모델 (응답 모델)
-class NCSCode(BaseModel):
-    ncsDegr: Optional[str]
-    ncsLclasCd: Optional[str]
-    ncsLclasCdNm: Optional[str]
-    ncsMclasCd: Optional[str]
-    ncsMclasCdNm: Optional[str]
-    ncsSclasCd: Optional[str]
-    ncsSclasCdNm: Optional[str]
-    ncsSubdCd: Optional[str]
-    ncsSubdCdNm: Optional[str]
-    dutyCd: Optional[str]
-
-class UserAnswer(BaseModel):
-    answer: str
+from app.databases import database, ncs_code   # 데이터베이스 및 테이블 임포트
+from app.schema import NCSCode, UserAnswer      # Pydantic 모델 임포트
+from app.elasticsearch import es_client
+from app.ChatGPTService import get_interview_response
 
 app = FastAPI()
 
@@ -73,7 +37,29 @@ async def get_ncs_codes(search: Optional[str] = Query(None, description="ncsLcla
     results = await database.fetch_all(query)
     return results
 
+# Elasticsearch를 이용한 검색 엔드포인트 예제
+@app.get("/business_overview", response_model=list)
+async def search_elasticsearch(query: str = Query(..., description="검색어 입력")):
+    # 예제: "your_index_name" 인덱스의 "content" 필드에서 match 쿼리 수행
+    body = {
+        "query": {
+            "match": {
+                "content": query
+            }
+        }
+    }
+    try:
+        results = es_client.search(index="your_index_name", body=body)
+        hits = results.get("hits", {}).get("hits", [])
+        return hits
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 # 인터뷰 엔드포인트 (기존 코드)
+
+
+
+
 @app.post("/interview")
 async def interview_endpoint(user: UserAnswer):
     try:
