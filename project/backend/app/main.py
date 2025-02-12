@@ -29,11 +29,11 @@ async def shutdown():
 
 # NCS 코드 검색 엔드포인트
 @app.get("/api/ncs-codes", response_model=List[NCSCode])
-async def get_ncs_codes(search: Optional[str] = Query(None, description="ncsLclasCdNm 검색어")):
+async def get_ncs_codes(search: Optional[str] = Query(None, description="ncsSubdCdNm 검색어")):
     query = ncs_code.select()
     if search:
         # 대소문자 구분 없이 검색 (ilike)
-        query = query.where(ncs_code.c.ncsLclasCdNm.ilike(f"%{search}%"))
+        query = query.where(ncs_code.c.ncsSubdCdNm.ilike(f"%{search}%"))
     results = await database.fetch_all(query)
     return results
 

@@ -1,5 +1,8 @@
-from pydantic import BaseModel
-from typing import List, Optional
+from pydantic import BaseModel, validator
+from typing import Optional
+
+class UserAnswer(BaseModel):
+    answer: str
 
 class NCSCode(BaseModel):
     ncsDegr: Optional[str]
@@ -13,5 +16,8 @@ class NCSCode(BaseModel):
     ncsSubdCdNm: Optional[str]
     dutyCd: Optional[str]
 
-class UserAnswer(BaseModel):
-    answer: str
+    @validator('*', pre=True)
+    def cast_all_to_str(cls, value):
+        if value is None:
+            return value
+        return str(value)

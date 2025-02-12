@@ -106,7 +106,7 @@ input[type="text"] {
   top: 110%;
   left: 0;
   right: 0;
-  background: white;
+  background: #fff;
   border: 1px solid #cbd5e0;
   border-top: none;
   max-height: 150px;
@@ -162,7 +162,6 @@ input[type="text"] {
     flex-direction: column;
     width: 90%;
   }
-
   .form-section, .image-section {
     width: 100%;
   }
