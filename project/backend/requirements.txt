@@ -7,3 +7,7 @@ numpy==2.2.2
 pandas==2.2.3
 pymysql==1.1.1
 sqlalchemy==2.0.20
+elasticsearch==8.15.0
+databases
+aiomysql
+cryptography
