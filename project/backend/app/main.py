@@ -4,10 +4,10 @@ from pydantic import BaseModel
 from typing import List, Optional
 import databases
 import sqlalchemy
-from .ChatGPTService import get_interview_response  # 기존 모듈 임포트
+from app.ChatGPTService import get_interview_response  # 기존 모듈 임포트
 
 # 데이터베이스 연결 (예: MySQL, PostgreSQL 등)
-DATABASE_URL = "mysql://fisaim:woorifisa3!W@localhost:3306/NCS_DB"  # 실제 환경에 맞게 수정
+DATABASE_URL = "mysql://ims:imsgreat1!W@221.155.195.6:3306/NCS_DB"  # 실제 환경에 맞게 수정
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
 
