@@ -6,6 +6,8 @@ services:
     build:
       context: frontend/.
       dockerfile: Dockerfile
+    env_file :
+      - .env
     container_name: my-web-frontend
     tty: true
     ports:
@@ -19,10 +21,12 @@ services:
     build:
       context: backend/.
       dockerfile: Dockerfile
+    env_file :
+      - .env
     container_name: my-web-backend
     tty: true
     ports:
       - 8000:8000
     volumes:
       - ./backend:/workspace
-    command: uvicorn main:app --host 0.0.0.0 --reload
+    command: uvicorn app.main:app --host 0.0.0.0 --reload --log-level debug

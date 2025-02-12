@@ -1,31 +1,39 @@
 /* ✅ 컨테이너 전체 스타일 */
 .interview-session-container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(to right, #000428, #004e92);
-    color: white;
-    padding: 20px;
-  }
-  
-  .interview-header {
-    width: 80%;
-    text-align: left;
-    margin-bottom: 20px;
-  }
-  
-  .interview-header h1 {
-    font-size: 2rem;
-  }
-  
-  .interview-header h2 {
-    font-size: 1.2rem;
-    opacity: 0.8;
-  }
-  
-  /* ✅ 타이머 스타일 (화면 최상단 중앙) */
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to right, #000428, #000428);
+  color: white;
+  padding: 20px;
+}
+
+/* ✅ 헤더 - 좌측 정렬로 변경 */
+.interview-header {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* ✅ 제목 (면접 유형) */
+.interview-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* ✅ 지원 직무 */
+.interview-header h2 {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-left: auto; /* 🔹 오른쪽 정렬 */
+  text-align: right;
+}
+
+/* ✅ 타이머 스타일 (화면 최상단 중앙) */
 .timer {
   font-size: 1.2rem;
   font-weight: bold;
@@ -37,83 +45,101 @@
   text-align: center;
   display: inline-block;
 }
-  
-  /* ✅ 웹캠 */
-  .video-container {
-    width: 50%;
-    max-width: 600px;
-    margin-bottom: 20px;
+
+/* ✅ 면접 화면 (웹캠) */
+.video-container {
+  width: 50%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+video {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+/* ✅ 채팅 박스 */
+.chat-box {
+  width: 50%;
+  max-width: 600px;
+  background: white;
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  overflow-y: auto;
+  height: 300px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ✅ 질문 / 답변 스타일 */
+.user-msg {
+  font-weight: bold;
+  color: blue;
+}
+
+.bot-msg {
+  font-weight: bold;
+  color: green;
+}
+
+/* ✅ 답변하는 중 표시 */
+.loading-msg {
+  font-weight: bold;
+  color: orange;
+  text-align: center;
+}
+
+/* ✅ 유저 입력 미리보기 */
+.user-input-preview {
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  width: 50%;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* ✅ "답변 완료" 버튼 */
+.submit-button {
+  background: #38bdf8;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background: #0284c7;
+}
+
+.submit-button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+/* ✅ 반응형 스타일 */
+@media (max-width: 768px) {
+  .interview-header {
+      flex-direction: column;
+      align-items: flex-start;
   }
-  
-  video {
-    width: 100%;
-    border-radius: 10px;
-    border: 2px solid white;
+
+  .interview-header h2 {
+      text-align: left;
+      margin-left: 0;
+      margin-top: 5px;
   }
-  
-  /* ✅ 채팅 박스 */
-  .chat-box {
-    width: 50%;
-    max-width: 600px;
-    background: white;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
-    overflow-y: auto;
-    height: 300px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+
+  .video-container, .chat-box, .user-input-preview {
+      width: 90%;
   }
-  
-  .user-msg {
-    font-weight: bold;
-    color: blue;
-  }
-  
-  .bot-msg {
-    font-weight: bold;
-    color: green;
-  }
-  
-  /* ✅ 답변하는 중 표시 */
-  .loading-msg {
-    font-weight: bold;
-    color: orange;
-    text-align: center;
-  }
-  
-  /* ✅ 유저 입력 미리보기 */
-  .user-input-preview {
-    margin-top: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 5px;
-    width: 50%;
-    max-width: 600px;
-    text-align: center;
-  }
-  
-  /* ✅ "답변 완료" 버튼 */
-  .submit-button {
-    background: #38bdf8;
-    color: white;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-  }
-  
-  .submit-button:hover {
-    background: #0284c7;
-  }
-  
-  .submit-button:disabled {
-    background: gray;
-    cursor: not-allowed;
-  }
-  
+}

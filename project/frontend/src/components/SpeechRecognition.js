@@ -1,37 +1,51 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const SpeechRecognitionComponent = ({ onResult }) => {
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
-  const transcriptRef = useRef(""); // 🔹 전체 문장을 저장하는 변수
+  const transcriptRef = useRef("");
 
   useEffect(() => {
     if (!("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
-      console.error("브라우저가 음성 인식을 지원하지 않습니다.");
+      console.error("❌ 브라우저가 음성 인식을 지원하지 않습니다.");
       return;
     }
-
-    recognitionRef.current = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognitionRef.current.continuous = true;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognitionRef.current = new SpeechRecognition();
+    recognitionRef.current.continuous = true; // 사용자가 말하는 동안 계속 인식
     recognitionRef.current.interimResults = true;
     recognitionRef.current.lang = "ko-KR";
 
+    recognitionRef.current.onstart = () => {
+      console.log("🎙 Speech recognition started");
+      setIsListening(true);
+    };
+
     recognitionRef.current.onresult = (event) => {
-      let newTranscript = "";
+      let finalTranscript = transcriptRef.current;
       for (let i = event.resultIndex; i < event.results.length; i++) {
+        // isFinal이 true인 결과만 누적합니다.
         if (event.results[i].isFinal) {
-          newTranscript += event.results[i][0].transcript;
+          finalTranscript += event.results[i][0].transcript + " ";
         }
       }
-      
-      if (newTranscript) {
-        transcriptRef.current += newTranscript + " "; // ✅ 새로운 문장을 누적
-        onResult(transcriptRef.current.trim()); // ✅ 전체 문장을 업데이트
-      }
+      transcriptRef.current = finalTranscript;
+      // 부모 컴포넌트에 누적된 최종 결과를 전달
+      onResult(finalTranscript.trim());
     };
 
     recognitionRef.current.onerror = (event) => {
-      console.error("음성 인식 오류 발생:", event.error);
+      // "aborted" 오류 등은 콘솔에 경고만 표시하고 무시합니다.
+      if (event.error === "aborted" || event.error === "no-speech") {
+        console.warn("⚠ Speech recognition error (ignored):", event.error);
+      } else {
+        console.error("⚠ Speech recognition error:", event.error);
+      }
+    };
+
+    recognitionRef.current.onend = () => {
+      console.log("🛑 Speech recognition ended");
+      setIsListening(false);
     };
 
     return () => {
@@ -41,26 +55,34 @@ const SpeechRecognitionComponent = ({ onResult }) => {
     };
   }, [onResult]);
 
-  const startListening = () => {
-    if (recognitionRef.current && !isListening) {
-      setIsListening(true);
-      transcriptRef.current = ""; // ✅ 새로운 질문마다 답변 초기화 (핵심 수정)
+  const startListening = useCallback(() => {
+    if (!recognitionRef.current || isListening) return;
+    console.log("🎙 Starting speech recognition...");
+    setIsListening(true);
+    transcriptRef.current = "";
+    try {
       recognitionRef.current.start();
+    } catch (err) {
+      console.error("Failed to start speech recognition:", err);
     }
-  };
+  }, [isListening]);
 
-  const stopListening = () => {
+  const stopListening = useCallback(() => {
     if (recognitionRef.current && isListening) {
-      setIsListening(false);
-      recognitionRef.current.stop();
+      console.log("🛑 Stopping speech recognition");
+      try {
+        recognitionRef.current.stop();
+      } catch (err) {
+        console.error("Failed to stop speech recognition:", err);
+      }
     }
-  };
+  }, [isListening]);
 
-  const resetTranscript = () => {
-    transcriptRef.current = ""; // ✅ 새로운 질문 시작 시 초기화
-  };
+  const resetTranscript = useCallback(() => {
+    transcriptRef.current = "";
+  }, []);
 
-  return { startListening, stopListening, resetTranscript };
+  return { startListening, stopListening, resetTranscript, isListening };
 };
 
 export default SpeechRecognitionComponent;

@@ -1,112 +1,104 @@
-/* ✅ 모든 여백 제거 및 기본 설정 */
+/* 기본 리셋 */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; /* 가로 스크롤 방지 */
-    background-color: #000428; /* 배경색 고정 */
-  }
-  
-  /* ✅ 전체 화면을 차지하도록 설정 */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  
-  /* ✅ 헤더 섹션 중앙 정렬 */
-  .interview-header {
-    width: 100%;
-    max-width: 900px;
-    text-align: center;
-    margin: 0 auto;
-  }
-  
-  .interview-header h1 {
-    font-size: 3rem;
-    font-weight: bold;
-  }
-  
-  .interview-header p {
-    font-size: 1.3rem;
-    margin-top: 10px;
-    opacity: 0.8;
-  }
-  
-  /* ✅ 버튼 중앙 정렬 */
-  .start-button {
-    margin-top: 20px;
-    padding: 15px 30px;
-    background: #2563eb;
-    color: white;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .start-button:hover {
-    background: #1d4ed8;
-  }
-  
-  /* ✅ 카드 컨테이너 정렬 문제 해결 */
-  .cards-container {
-    display: flex;
-    justify-content: center; /* 수평 정렬 */
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* 전체 페이지 */
+.interview-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  color: #333;
+}
+
+/* 헤더 섹션: 두 컬럼 레이아웃 */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+/* intro와 instructions 영역의 기본 너비를 넓힘 */
+.intro, .instructions {
+  flex: 1;
+  /* 기존 width: 300px; 대신 최소 너비를 설정 */
+  min-width: 300px;
+  /* 필요에 따라 너비를 자동으로 채움 */
+  width: auto;
+}
+
+.intro h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1e1b88;
+}
+
+.intro p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 10px ; /* 설명 아래 여백 추가 */
+}
+
+.instructions h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #1e1b88;
+}
+
+.instructions ul {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.instructions li {
+  margin-bottom: 10px;
+}
+
+/* 시작 버튼 */
+.start-button {
+  padding: 18px 50px;
+  background: #2563eb !important;  /* 기본 파란색 */
+  color: #ffffff !important;  /* 흰색 텍스트 */
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  /* 버튼 위치 중앙정렬을 위해 자동 마진 사용 */
+  margin: 20px auto 0;
+}
+
+.start-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  background-color: #1d4ed8 !important; /* hover 시 진한 파란색 */
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    width: 80%;
-    max-width: 1400px;
-    margin: 40px auto; /* 중앙 정렬 */
-    gap: 20px;
-  }
-  
-  /* ✅ 개별 카드 디자인 */
-  .card {
-    background: white;
-    color: black;
-    width: 320px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
     text-align: center;
-    transition: transform 0.3s;
   }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  /* ✅ 카드 안의 태그 디자인 */
-  .tags {
-    margin-top: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-  }
-  
-  .tags span {
-    background: #e0e0e0;
-    padding: 7px 12px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    color: black;
-  }
-  
-  /* ✅ 모바일 최적화 */
-  @media (max-width: 768px) {
-    .cards-container {
-      flex-direction: column;
-      width: 100%;
-      padding: 0 20px;
-    }
-  
-    .card {
-      width: 100%;
-      max-width: 350px;
-    }
-  }
-  
+}
