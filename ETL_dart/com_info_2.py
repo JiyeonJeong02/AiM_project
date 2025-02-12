@@ -171,7 +171,7 @@ if __name__ == "__main__":
     crawler = DartCrawler()
 
     # 기업 데이터 업데이트 실행 (첫 100개 기업)
-    start_idx = 0
-    end_idx = 3835  
+    start_idx = 500
+    end_idx = 1000
 
     crawler.process_company_overviews(start_idx, end_idx)
