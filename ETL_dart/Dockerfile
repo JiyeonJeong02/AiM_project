@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "big5_business_info_summary.py"]
+# CMD ["python", "big5_summary_connect_ELK.py"]
