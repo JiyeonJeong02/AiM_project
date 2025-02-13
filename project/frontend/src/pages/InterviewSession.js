@@ -25,6 +25,17 @@ const InterviewSession = () => {
     onResult: (text) => setUserAnswer(text),
   });
 
+  // TTS 함수: 텍스트를 읽어주는 함수
+  const speakText = (text) => {
+    console.log("speakText called with:", text);
+    // 기존에 실행 중인 음성을 취소 (선택 사항)
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "ko-KR";
+    speechSynthesis.speak(utterance);
+  };
+  
+
   // 채팅창 자동 스크롤
   useEffect(() => {
     if (chatBoxRef.current) {
@@ -38,6 +49,7 @@ const InterviewSession = () => {
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         if (videoRef.current) {
+          // muted 속성을 이용해 자신의 목소리가 에코되지 않도록 합니다.
           videoRef.current.srcObject = stream;
         }
       })
@@ -50,6 +62,8 @@ const InterviewSession = () => {
       resetTranscript();
       startListening();
       setIsRecording(true);
+      // 생성된 봇 질문을 TTS로 읽어줍니다.
+      speakText(conversation[conversation.length - 1].text);
     }
   }, [conversation, isLoading, resetTranscript, startListening]);
 
@@ -72,9 +86,12 @@ const InterviewSession = () => {
     const botResponse = await getInterviewResponse(currentAnswer, job);
     setConversation((prev) => [...prev, { role: "bot", text: botResponse }]);
 
+    // 봇 응답을 TTS로 읽어줍니다.
+    speakText(botResponse);
+
     setIsLoading(false);
 
-    // GPT 응답 후 3초 대기 후 다음 질문을 위한 음성 인식 시작
+    // GPT 응답 후 3초 대기 후 자동으로 다음 질문을 위한 음성 인식 시작
     setTimeout(() => {
       console.log("🕒 3초 대기 후 다음 질문 진행...");
       resetTranscript();
@@ -91,7 +108,7 @@ const InterviewSession = () => {
       </div>
 
       <div className="video-container">
-        <video ref={videoRef} autoPlay playsInline />
+        <video ref={videoRef} autoPlay playsInline muted />
       </div>
 
       <div className="chat-box" ref={chatBoxRef}>
