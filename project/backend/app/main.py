@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from typing import List, Optional
 from app.databases import database, ncs_code   # 데이터베이스 및 테이블 임포트
-from app.schema import NCSCode, UserAnswer      # Pydantic 모델 임포트
+from app.schema import NCSCode, UserAnswer, InterviewRequest   # Pydantic 모델 임포트
 from app.elasticsearch import es_client
 from app.ChatGPTService import get_interview_response
 
@@ -37,10 +37,9 @@ async def get_ncs_codes(search: Optional[str] = Query(None, description="ncsSubd
     results = await database.fetch_all(query)
     return results
 
-# Elasticsearch를 이용한 검색 엔드포인트 예제
+# Elasticsearch 검색 엔드포인트 예제
 @app.get("/business_overview", response_model=list)
 async def search_elasticsearch(query: str = Query(..., description="검색어 입력")):
-    # 예제: "your_index_name" 인덱스의 "content" 필드에서 match 쿼리 수행
     body = {
         "query": {
             "match": {
@@ -55,16 +54,12 @@ async def search_elasticsearch(query: str = Query(..., description="검색어 �
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# 인터뷰 엔드포인트 (기존 코드)
-
-
-
-
+# 인터뷰 엔드포인트
 @app.post("/interview")
-async def interview_endpoint(user: UserAnswer):
+async def interview_endpoint(request: InterviewRequest):
     try:
-        print(f"🔹 사용자 입력: {user.answer}")
-        interview_response = await get_interview_response(user.answer)
+        print(f"🔹 사용자 입력: {request.answer}, 소분류: {request.subcategory}")
+        interview_response = await get_interview_response(request.answer, request.subcategory)
         return {"response": interview_response}
     except Exception as e:
         print(f"❌ 서버 오류: {e}")

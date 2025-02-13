@@ -13,7 +13,9 @@ const StartInterview = () => {
   // API 호출: 검색어(query)를 포함하여 ncs_code에서 ncsSubdCdNm 검색
   const fetchSuggestions = async (query) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/ncs-codes?search=${encodeURIComponent(query)}`);
+      const response = await fetch(
+        `http://localhost:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
+      );
       if (response.ok) {
         const data = await response.json();
         setSuggestions(data);
@@ -32,6 +34,15 @@ const StartInterview = () => {
     setShowSuggestions(false);
   };
 
+  // 엔터키 입력 시 검색
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      fetchSuggestions(job);
+      setShowSuggestions(true);
+    }
+  };
+
   // 추천 항목 클릭 시 처리 (ncsSubdCdNm 사용)
   const handleSelectSuggestion = (suggestion) => {
     setJob(suggestion.ncsSubdCdNm);
@@ -48,7 +59,7 @@ const StartInterview = () => {
     navigate("/interview-start", { state: { title, job: selectedJob } });
   };
 
-  // 글자 수 2자 이상일 때 자동 검색
+  // 글자 수 2자 이상일 때 자동 검색 (원하는 경우 유지)
   useEffect(() => {
     if (job.trim().length > 1) {
       fetchSuggestions(job);
@@ -68,9 +79,9 @@ const StartInterview = () => {
         <div className="form-section">
           {/* 제목 입력 */}
           <label htmlFor="title">제목</label>
-          <input 
-            type="text" 
-            id="title" 
+          <input
+            type="text"
+            id="title"
             placeholder="예: AI 면접 연습 #1"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -79,16 +90,17 @@ const StartInterview = () => {
           {/* 직무 선택 (소분류) */}
           <label htmlFor="job">직무 선택 (소분류)</label>
           <div className="autocomplete-container">
-            <input 
-              type="text" 
-              id="job" 
+            <input
+              type="text"
+              id="job"
               placeholder="지원 직무 (소분류)를 입력하세요"
               value={job}
               onChange={handleJobChange}
+              onKeyDown={handleKeyDown}
               autoComplete="off"
             />
-            <button 
-              className="search-button" 
+            <button
+              className="search-button"
               onClick={() => {
                 fetchSuggestions(job);
                 setShowSuggestions(true);
@@ -99,7 +111,10 @@ const StartInterview = () => {
             {showSuggestions && suggestions.length > 0 && (
               <ul className="suggestions-list">
                 {suggestions.map((item, index) => (
-                  <li key={`${item.ncsSubdCd}-${index}`} onClick={() => handleSelectSuggestion(item)}>
+                  <li
+                    key={`${item.ncsSubdCd}-${index}`}
+                    onClick={() => handleSelectSuggestion(item)}
+                  >
                     {item.ncsSubdCdNm}
                   </li>
                 ))}
