@@ -1,10 +1,14 @@
 from pydantic import BaseModel, validator
 from typing import Optional
 
-class UserAnswer(BaseModel):
-    answer: str
+class StringCastingBase(BaseModel):
+    @validator('*', pre=True)
+    def cast_all_to_str(cls, value):
+        if value is None:
+            return value
+        return str(value)
 
-class NCSCode(BaseModel):
+class NCSCode(StringCastingBase):
     ncsDegr: Optional[str]
     ncsLclasCd: Optional[str]
     ncsLclasCdNm: Optional[str]
@@ -16,8 +20,9 @@ class NCSCode(BaseModel):
     ncsSubdCdNm: Optional[str]
     dutyCd: Optional[str]
 
-    @validator('*', pre=True)
-    def cast_all_to_str(cls, value):
-        if value is None:
-            return value
-        return str(value)
+class UserAnswer(StringCastingBase):
+    answer: str
+
+class InterviewRequest(BaseModel):
+    answer: str
+    subcategory: str

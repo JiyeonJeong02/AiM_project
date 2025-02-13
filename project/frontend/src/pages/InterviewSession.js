@@ -10,7 +10,9 @@ const InterviewSession = () => {
   const location = useLocation();
   const { title, job } = location.state || { title: "AI 면접", job: "직무 미정" };
 
-  const [conversation, setConversation] = useState([{ role: "bot", text: "자기소개를 해주세요." }]);
+  const [conversation, setConversation] = useState([
+    { role: "bot", text: "자기소개를 해주세요." },
+  ]);
   const [userAnswer, setUserAnswer] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +24,17 @@ const InterviewSession = () => {
   const { startListening, stopListening, resetTranscript } = SpeechRecognitionComponent({
     onResult: (text) => setUserAnswer(text),
   });
+
+  // TTS 함수: 텍스트를 읽어주는 함수
+  const speakText = (text) => {
+    console.log("speakText called with:", text);
+    // 기존에 실행 중인 음성을 취소 (선택 사항)
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "ko-KR";
+    speechSynthesis.speak(utterance);
+  };
+  
 
   // 채팅창 자동 스크롤
   useEffect(() => {
@@ -36,6 +49,7 @@ const InterviewSession = () => {
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         if (videoRef.current) {
+          // muted 속성을 이용해 자신의 목소리가 에코되지 않도록 합니다.
           videoRef.current.srcObject = stream;
         }
       })
@@ -48,6 +62,8 @@ const InterviewSession = () => {
       resetTranscript();
       startListening();
       setIsRecording(true);
+      // 생성된 봇 질문을 TTS로 읽어줍니다.
+      speakText(conversation[conversation.length - 1].text);
     }
   }, [conversation, isLoading, resetTranscript, startListening]);
 
@@ -63,10 +79,15 @@ const InterviewSession = () => {
     setUserAnswer("");
     resetTranscript();
 
+    // 사용자의 답변 추가
     setConversation((prev) => [...prev, { role: "user", text: currentAnswer }]);
 
-    const botResponse = await getInterviewResponse(currentAnswer);
+    // 선택된 소분류(job)를 두 번째 인자로 전달합니다.
+    const botResponse = await getInterviewResponse(currentAnswer, job);
     setConversation((prev) => [...prev, { role: "bot", text: botResponse }]);
+
+    // 봇 응답을 TTS로 읽어줍니다.
+    speakText(botResponse);
 
     setIsLoading(false);
 
@@ -87,7 +108,7 @@ const InterviewSession = () => {
       </div>
 
       <div className="video-container">
-        <video ref={videoRef} autoPlay playsInline />
+        <video ref={videoRef} autoPlay playsInline muted />
       </div>
 
       <div className="chat-box" ref={chatBoxRef}>

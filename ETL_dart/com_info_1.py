@@ -163,23 +163,24 @@ class DartCrawler:
         
         sql = """
         INSERT INTO company_info (
-            corp_code, corp_name, stock_code,
+            corp_code, corp_name, corp_name_eng, stock_code,
             business_number, ceo_name, corp_cls, jurir_no,
-            establishment_date, acc_mt, zip_code, address,
+            establishment_date, acc_mt, address,
             homepage, phone_number, fax_number,
             total_assets, net_income, revenue, operating_profit,
             bsns_year, reprt_code,
             last_update, created_at, updated_at
         ) VALUES (
-            %(corp_code)s, %(corp_name)s, %(stock_code)s,
+            %(corp_code)s, %(corp_name)s, %(corp_name_eng)s, %(stock_code)s,
             %(business_number)s, %(ceo_name)s, %(corp_cls)s, %(jurir_no)s,
-            %(establishment_date)s, %(acc_mt)s, %(zip_code)s, %(address)s,
+            %(establishment_date)s, %(acc_mt)s, %(address)s,
             %(homepage)s, %(phone_number)s, %(fax_number)s,
             %(total_assets)s, %(net_income)s, %(revenue)s, %(operating_profit)s,
             %(bsns_year)s, %(reprt_code)s,
             NOW(), NOW(), NOW()
         ) ON DUPLICATE KEY UPDATE
             corp_name = VALUES(corp_name),
+            corp_name_eng = VALUES(corp_name_eng),
             total_assets = VALUES(total_assets),
             net_income = VALUES(net_income),
             revenue = VALUES(revenue),
@@ -229,6 +230,7 @@ class DartCrawler:
                 data = {
                     'corp_code': corp['corp_code'],
                     'corp_name': corp['corp_name'],
+                    'corp_name_eng': corp['corp_name_eng'],
                     'stock_code': corp['stock_code'],
                     'business_number': company_info.get('businessNumber'),
                     'ceo_name': company_info.get('ceoNm'),
@@ -236,7 +238,6 @@ class DartCrawler:
                     'jurir_no': company_info.get('jurirNo'),
                     'establishment_date': company_info.get('estDt'),
                     'acc_mt': company_info.get('accMt'),
-                    'zip_code': company_info.get('zipNo'),
                     'address': company_info.get('adres'),
                     'homepage': company_info.get('homepageUrl'),
                     'phone_number': company_info.get('phoneNumber'),
@@ -274,4 +275,4 @@ class DartCrawler:
 if __name__ == "__main__":
     crawler = DartCrawler()
     # 원하는 index의 기업만 처리
-    crawler.process_companies(start_idx=1000, end_idx=5000)
+    crawler.process_companies(start_idx=0, end_idx=1000)
