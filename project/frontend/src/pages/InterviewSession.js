@@ -10,7 +10,9 @@ const InterviewSession = () => {
   const location = useLocation();
   const { title, job } = location.state || { title: "AI 면접", job: "직무 미정" };
 
-  const [conversation, setConversation] = useState([{ role: "bot", text: "자기소개를 해주세요." }]);
+  const [conversation, setConversation] = useState([
+    { role: "bot", text: "자기소개를 해주세요." },
+  ]);
   const [userAnswer, setUserAnswer] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -63,14 +65,16 @@ const InterviewSession = () => {
     setUserAnswer("");
     resetTranscript();
 
+    // 사용자의 답변 추가
     setConversation((prev) => [...prev, { role: "user", text: currentAnswer }]);
 
-    const botResponse = await getInterviewResponse(currentAnswer);
+    // 선택된 소분류(job)를 두 번째 인자로 전달합니다.
+    const botResponse = await getInterviewResponse(currentAnswer, job);
     setConversation((prev) => [...prev, { role: "bot", text: botResponse }]);
 
     setIsLoading(false);
 
-    // GPT 응답 후 3초 대기 후 자동으로 다음 질문을 위한 음성 인식 시작
+    // GPT 응답 후 3초 대기 후 다음 질문을 위한 음성 인식 시작
     setTimeout(() => {
       console.log("🕒 3초 대기 후 다음 질문 진행...");
       resetTranscript();
