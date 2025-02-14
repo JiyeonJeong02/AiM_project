@@ -1,4 +1,4 @@
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, validator, Field
 from typing import Optional
 
 class StringCastingBase(BaseModel):
@@ -25,4 +25,5 @@ class UserAnswer(StringCastingBase):
 
 class InterviewRequest(BaseModel):
     answer: str
+    companyname : str = Field(default="")
     subcategory: str

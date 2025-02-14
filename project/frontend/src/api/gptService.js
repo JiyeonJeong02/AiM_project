@@ -1,10 +1,11 @@
 import axios from "axios";
 
-export const getInterviewResponse = async (userAnswer, subcategory) => {
+export const getInterviewResponse = async (userAnswer, companyname, subcategory) => {
   try {
     const response = await axios.post("http://localhost:8000/interview", {
       answer: userAnswer,
-      subcategory: subcategory,  // 두 번째 인자 추가
+      companyname : companyname,
+      subcategory: subcategory,
     });
     return response.data.response;
   } catch (error) {
