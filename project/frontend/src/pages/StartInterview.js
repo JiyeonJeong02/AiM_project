@@ -57,8 +57,11 @@ const StartInterview = () => {
       alert("제목과 직무를 올바르게 입력해주세요.");
       return;
     }
-    navigate("/interview-start", { state: { title, company, job: selectedJob } });
+    const stateData = { title, company, job: selectedJob };
+    localStorage.setItem("interviewData", JSON.stringify(stateData));
+    navigate("/interview-start", { state: stateData });
   };
+  
 
   // 글자 수 2자 이상일 때 자동 검색 (원하는 경우 유지)
   useEffect(() => {
@@ -73,7 +76,9 @@ const StartInterview = () => {
     <div className="start-interview-container">
       <div className="info-header">
         <h1>제목과 직무를 입력해 주세요.</h1>
-        <p>사용자의 기본 정보를 입력하는 단계입니다. 제목, 회사명(선택), 직무를 입력해주세요.</p>
+        <p>
+          사용자의 기본 정보를 입력하는 단계입니다. 제목, 회사명(선택), 직무를 입력해주세요.
+        </p>
       </div>
 
       <div className="form-container">
@@ -87,14 +92,17 @@ const StartInterview = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          {/*기업명 입력력*/}
+          {/* 기업명 입력 */}
           <label htmlFor="company">기업명</label>
           <input
             type="text"
             id="company"
             placeholder="기업명을 입력하세요 (선택)"
             value={company}
-            onChange={(e) => setCompany(e.target.value)}
+            onChange={(e) => {
+              console.log("company input:", e.target.value);
+              setCompany(e.target.value);
+            }}
           />
           {/* 직무 선택 (소분류) */}
           <label htmlFor="job">직무 선택 (소분류)</label>
