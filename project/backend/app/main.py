@@ -39,16 +39,19 @@ async def get_ncs_codes(search: Optional[str] = Query(None, description="ncsSubd
 
 # Elasticsearch 검색 엔드포인트 예제
 @app.get("/business_overview", response_model=list)
-async def search_elasticsearch(query: str = Query(..., description="검색어 입력")):
+async def search_business_overview(company_name: str = Query(..., description="검색할 기업명을 입력하세요")):
+    # 검색 쿼리 구성: company_name 필드에 대해 입력 받은 값을 매치하고, _source 파라미터로 반환할 필드를 지정합니다.
     body = {
         "query": {
             "match": {
-                "content": query
+                "company_name": company_name
             }
-        }
+        },
+        "_source": ["business_overview_summary"]
     }
+
     try:
-        results = es_client.search(index="your_index_name", body=body)
+        results = es_client.search(index="business_overview", body=body)
         hits = results.get("hits", {}).get("hits", [])
         return hits
     except Exception as e:
@@ -58,8 +61,8 @@ async def search_elasticsearch(query: str = Query(..., description="검색어 �
 @app.post("/interview")
 async def interview_endpoint(request: InterviewRequest):
     try:
-        print(f"🔹 사용자 입력: {request.answer}, 소분류: {request.subcategory}")
-        interview_response = await get_interview_response(request.answer, request.subcategory)
+        print(f"🔹 사용자 입력: {request.answer}, 기업명 : {request.companyname}, 소분류: {request.subcategory}")
+        interview_response = await get_interview_response(request.answer, request.companyname, request.subcategory)
         return {"response": interview_response}
     except Exception as e:
         print(f"❌ 서버 오류: {e}")
