@@ -25,5 +25,5 @@ class UserAnswer(StringCastingBase):
 
 class InterviewRequest(BaseModel):
     answer: str
-    companyname : str = Field(default="")
+    companyname : str 
     subcategory: str

@@ -60,10 +60,12 @@ async def search_business_overview(company_name: str = Query(..., description="�
 # 인터뷰 엔드포인트
 @app.post("/interview")
 async def interview_endpoint(request: InterviewRequest):
+    print("Received request:", request.dict())
     try:
-        print(f"🔹 사용자 입력: {request.answer}, 기업명 : {request.companyname}, 소분류: {request.subcategory}")
+        # 기존 코드
         interview_response = await get_interview_response(request.answer, request.companyname, request.subcategory)
         return {"response": interview_response}
     except Exception as e:
         print(f"❌ 서버 오류: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
