@@ -11,7 +11,7 @@ const Home = () => {
       buttonText: "기업 정보",
       bgColor: "teal",
       imgSrc: "/images/text.jpg",
-      link: "#", // 링크 없음
+      link: "Company-info", // 링크 없음
     },
     {
       title: "AI 면접",

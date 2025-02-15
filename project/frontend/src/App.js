@@ -9,6 +9,7 @@ import StartInterview from "./pages/StartInterview";
 import InterviewStart from "./pages/InterviewStart";
 import InterviewSession from "./pages/InterviewSession";
 import InterviewResults from "./pages/InterviewResults"; // 새로 추가
+import CompanyInfo from "./pages/CompanyInfo"; 
 
 import "./App.css"; // 스타일 적용
 
@@ -25,7 +26,8 @@ function App() {
           <Route path="/start-interview" element={<StartInterview />} />
           <Route path="/interview-start" element={<InterviewStart />} />
           <Route path="/interview-session" element={<InterviewSession />} />
-          <Route path="/interview-results" element={<InterviewResults />} /> {/* 새 결과 페이지 */}
+          <Route path="/interview-results" element={<InterviewResults />} />
+          <Route path="/company-info" element={<CompanyInfo />} />
         </Routes>
       </div>
     </Router>
