@@ -31,15 +31,14 @@ html, body {
   flex-wrap: wrap;
 }
 
-/* intro와 instructions 영역의 기본 너비를 넓힘 */
+/* intro와 instructions 영역 */
 .intro, .instructions {
   flex: 1;
-  /* 기존 width: 300px; 대신 최소 너비를 설정 */
   min-width: 300px;
-  /* 필요에 따라 너비를 자동으로 채움 */
   width: auto;
 }
 
+/* 헤더 및 제목은 기존 스타일 유지 */
 .intro h1 {
   font-size: 3rem;
   font-weight: 700;
@@ -47,36 +46,36 @@ html, body {
   color: #1e1b88;
 }
 
-.intro p {
-  font-size: 1.3rem;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 10px ; /* 설명 아래 여백 추가 */
-}
-
 .instructions h2 {
   font-size: 3rem;
   margin-bottom: 20px;
   color: #1e1b88;
+  font-weight: 700;
+}
+
+/* 본문 텍스트: 헤더와 제목을 제외한 모든 텍스트를 진한 검은색과 볼드체로 */
+.intro p,
+.instructions ul,
+.instructions li,
+.info-header p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #000;         /* 진한 검은색 */
+  font-weight: 700;     /* 볼드체 */
+  margin-bottom: 10px;
 }
 
 .instructions ul {
   list-style: disc;
   margin-left: 20px;
   margin-bottom: 30px;
-  font-size: 1.1rem;
-  color: #555;
 }
 
-.instructions li {
-  margin-bottom: 10px;
-}
-
-/* 시작 버튼 */
+/* 시작 버튼 (헤더, 제목 제외) */
 .start-button {
   padding: 18px 50px;
-  background: #2563eb !important;  /* 기본 파란색 */
-  color: #ffffff !important;  /* 흰색 텍스트 */
+  background: #2563eb !important;
+  color: #ffffff !important;
   font-size: 1.4rem;
   font-weight: 600;
   border: none;
@@ -84,14 +83,13 @@ html, body {
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-  /* 버튼 위치 중앙정렬을 위해 자동 마진 사용 */
   margin: 20px auto 0;
 }
 
 .start-button:hover {
   transform: translateY(-5px);
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-  background-color: #1d4ed8 !important; /* hover 시 진한 파란색 */
+  background-color: #1d4ed8 !important;
 }
 
 /* 모바일 최적화 */

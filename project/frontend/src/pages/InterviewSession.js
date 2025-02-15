@@ -4,24 +4,24 @@ import SpeechRecognitionComponent from "../components/SpeechRecognition";
 import { getInterviewResponse } from "../api/gptService";
 import "./InterviewSession.css";
 
-const INTERVIEW_TIME = 60; // 답변 시간 (초)
+const INTERVIEW_TIME = 60;
 
 const InterviewSession = () => {
-  // location.state가 없으면 localStorage에서 불러옵니다.
-  const location = useLocation();
-  const state = location.state || JSON.parse(localStorage.getItem("interviewData") || "{}");
+  // location.state + localStorage 병합
+  const locationState = useLocation().state || {};
+  const storageState = JSON.parse(localStorage.getItem("interviewData") || "{}");
+  const state = { ...storageState, ...locationState };
+
   const title = state.title || "AI 면접";
   const company = state.company || "";
   const job = state.job || "직무 미정";
 
-  // 나머지 코드 동일...
   const [conversation, setConversation] = useState([
     { role: "bot", text: "자기소개를 해주세요." },
   ]);
   const [userAnswer, setUserAnswer] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(INTERVIEW_TIME);
   const chatBoxRef = useRef(null);
   const videoRef = useRef(null);
   const timerRef = useRef(null);
@@ -30,26 +30,25 @@ const InterviewSession = () => {
     onResult: (text) => setUserAnswer(text),
   });
 
-  // 채팅창 자동 스크롤
+  // 스크롤 자동
   useEffect(() => {
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
     }
   }, [conversation]);
 
-  // 웹캠 설정 (에코 방지를 위해 muted 추가)
+  // 웹캠
   useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then((stream) => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
       })
-      .catch((err) => console.error("❌ 웹캠 접근 오류:", err));
+      .catch((err) => console.error("❌ 웹캠 오류:", err));
   }, []);
 
-  // 봇 질문이 나타나면 자동으로 음성 인식 시작
+  // 봇 질문 -> 음성인식 자동 시작
   useEffect(() => {
     if (!isLoading && conversation[conversation.length - 1].role === "bot") {
       resetTranscript();
@@ -59,29 +58,25 @@ const InterviewSession = () => {
   }, [conversation, isLoading, resetTranscript, startListening]);
 
   const handleSubmitResponse = async () => {
-    if (!userAnswer.trim() || isLoading) return; // 중복 요청 방지
-
+    if (!userAnswer.trim() || isLoading) return;
     stopListening();
     setIsRecording(false);
     setIsLoading(true);
-    clearInterval(timerRef.current);
 
     const currentAnswer = userAnswer.trim();
     setUserAnswer("");
     resetTranscript();
 
-    // 사용자의 답변 추가
     setConversation((prev) => [...prev, { role: "user", text: currentAnswer }]);
 
-    // 회사명(company)와 소분류(job)를 함께 전달합니다.
+    // 백엔드 요청
     const botResponse = await getInterviewResponse(currentAnswer, company, job);
     setConversation((prev) => [...prev, { role: "bot", text: botResponse }]);
 
     setIsLoading(false);
 
-    // GPT 응답 후 3초 대기 후 다음 질문을 위한 음성 인식 시작
+    // 3초 후 다음 질문
     setTimeout(() => {
-      console.log("🕒 3초 대기 후 다음 질문 진행...");
       resetTranscript();
       startListening();
       setIsRecording(true);
@@ -90,25 +85,31 @@ const InterviewSession = () => {
 
   return (
     <div className="interview-session-container">
+      {/* 헤더 */}
       <div className="interview-header">
         <h1>{title}</h1>
-        <h2>지원 직무: {job}</h2>
-        {company && <h3>기업명: {company}</h3>}
+        <div className="header-subinfo">
+          <p>지원 직무: {job}</p>
+          {company && <p>기업명: {company}</p>}
+        </div>
       </div>
 
-      <div className="video-container">
-        <video ref={videoRef} autoPlay playsInline muted />
+      {/* 메인 컨텐츠 (가로 레이아웃) */}
+      <div className="main-content">
+        <div className="video-container">
+          <video ref={videoRef} autoPlay playsInline muted />
+        </div>
+        <div className="chat-box" ref={chatBoxRef}>
+          {conversation.map((msg, index) => (
+            <p key={index} className={msg.role === "user" ? "user-msg" : "bot-msg"}>
+              {msg.text}
+            </p>
+          ))}
+          {isLoading && <p className="loading-msg">답변을 생성하는 중...</p>}
+        </div>
       </div>
 
-      <div className="chat-box" ref={chatBoxRef}>
-        {conversation.map((msg, index) => (
-          <p key={index} className={msg.role === "user" ? "user-msg" : "bot-msg"}>
-            {msg.text}
-          </p>
-        ))}
-        {isLoading && <p className="loading-msg">답변을 생성하는 중...</p>}
-      </div>
-
+      {/* 사용자 입력 미리보기 + 답변 버튼 */}
       {isRecording && userAnswer && (
         <div className="user-input-preview">
           <p>🗣 면접자 답변: {userAnswer}</p>
@@ -116,7 +117,7 @@ const InterviewSession = () => {
             답변 완료
           </button>
         </div>
-      )}
+      )} 
     </div>
   );
 };
