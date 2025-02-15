@@ -1,56 +1,53 @@
-/* ✅ 컨테이너 전체 스타일 */
-.interview-session-container {
-  width: 100%;
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  background: #dadae2 !important;
   min-height: 100vh;
+}
+
+
+
+/* 헤더 */
+.interview-header {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background: linear-gradient(to right, #000428, #000428);
-  color: white;
-  padding: 20px;
-}
-
-/* ✅ 헤더 - 좌측 정렬로 변경 */
-.interview-header {
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 20px;
 }
 
-/* ✅ 제목 (면접 유형) */
 .interview-header h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.header-subinfo {
+  display: flex;
+  gap: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.header-subinfo p {
   margin: 0;
+  white-space: nowrap;
 }
 
-/* ✅ 지원 직무 */
-.interview-header h2 {
-  font-size: 1.2rem;
-  opacity: 0.8;
-  margin-left: auto; /* 🔹 오른쪽 정렬 */
-  text-align: right;
-}
-
-/* ✅ 타이머 스타일 (화면 최상단 중앙) */
-.timer {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #f97316;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  display: inline-block;
-}
-
-/* ✅ 면접 화면 (웹캠) */
-.video-container {
-  width: 50%;
-  max-width: 600px;
+/* 메인 컨텐츠 (가로 레이아웃) */
+.main-content {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
   margin-bottom: 20px;
+}
+
+/* 비디오 영역 */
+.video-container {
+  flex: 1;
+  max-width: 600px;
 }
 
 video {
@@ -59,23 +56,22 @@ video {
   border: 2px solid white;
 }
 
-/* ✅ 채팅 박스 */
+/* 채팅 박스 */
 .chat-box {
-  width: 50%;
+  flex: 1;
   max-width: 600px;
+  height: 340px;
   background: white;
   color: black;
   padding: 15px;
   border-radius: 10px;
   overflow-y: auto;
-  height: 300px;
   text-align: left;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* ✅ 질문 / 답변 스타일 */
 .user-msg {
   font-weight: bold;
   color: blue;
@@ -86,30 +82,30 @@ video {
   color: green;
 }
 
-/* ✅ 답변하는 중 표시 */
 .loading-msg {
   font-weight: bold;
   color: orange;
   text-align: center;
 }
 
-/* ✅ 유저 입력 미리보기 */
+/* 사용자 입력 미리보기 */
 .user-input-preview {
-  margin-top: 10px;
+  width: 100%;
+  max-width: 600px;
   background: rgba(255, 255, 255, 0.2);
   padding: 10px;
   border-radius: 5px;
-  width: 50%;
-  max-width: 600px;
   text-align: center;
+  margin: 0 auto;
 }
 
-/* ✅ "답변 완료" 버튼 */
+/* "답변 완료" 버튼 */
 .submit-button {
   background: #38bdf8;
   color: white;
   padding: 12px;
   font-size: 16px;
+  font-weight: 600;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -126,20 +122,19 @@ video {
   cursor: not-allowed;
 }
 
-/* ✅ 반응형 스타일 */
+/* 반응형 */
 @media (max-width: 768px) {
-  .interview-header {
-      flex-direction: column;
-      align-items: flex-start;
+  .main-content {
+    flex-direction: column;
   }
-
-  .interview-header h2 {
-      text-align: left;
-      margin-left: 0;
-      margin-top: 5px;
+  
+  .video-container,
+  .chat-box {
+    width: 100%;
+    max-width: 100%;
   }
-
-  .video-container, .chat-box, .user-input-preview {
-      width: 90%;
+  
+  .chat-box {
+    height: 300px;
   }
 }

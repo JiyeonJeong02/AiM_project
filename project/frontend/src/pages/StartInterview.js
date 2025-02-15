@@ -52,15 +52,18 @@ const StartInterview = () => {
     setShowSuggestions(false);
   };
 
-  const handleConfirm = () => {
-    if (!title.trim() || !job.trim() || !selectedJob.trim()) {
-      alert("제목과 직무를 올바르게 입력해주세요.");
-      return;
-    }
-    const stateData = { title, company, job: selectedJob };
-    localStorage.setItem("interviewData", JSON.stringify(stateData));
-    navigate("/interview-start", { state: stateData });
-  };
+const handleConfirm = () => {
+  if (!title.trim() || !job.trim() || !selectedJob.trim()) {
+    alert("제목과 직무를 올바르게 입력해주세요.");
+    return;
+  }
+  const stateData = { title, company, job: selectedJob };
+  console.log("Navigating with state:", stateData); // 입력된 company 확인
+  localStorage.setItem("interviewData", JSON.stringify(stateData));
+  navigate("/interview-start", { state: stateData });
+};
+
+
   
 
   // 글자 수 2자 이상일 때 자동 검색 (원하는 경우 유지)
