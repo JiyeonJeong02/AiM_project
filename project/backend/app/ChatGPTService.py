@@ -115,3 +115,25 @@ async def get_interview_response(user_answer: str, companyname: str, subcategory
     except Exception as e:
         print(f"❌ OpenAI API 오류 발생: {e}")
         return "죄송합니다. 응답을 생성하는 중 오류가 발생했습니다."
+    
+
+
+async def get_interview_feedback(conversation_text: str) -> str:
+    try:
+        response = await openai.ChatCompletion.acreate(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "당신은 전문 면접관입니다. 다음 대화 내용을 바탕으로 면접 피드백(요약)을 제공하세요. "
+                        "개선할 점을 간략하게 정리해 주세요."
+                    )
+                },
+                {"role": "user", "content": conversation_text}
+            ]
+        )
+        return response["choices"][0]["message"]["content"].strip()
+    except Exception as e:
+        print(f"❌ 피드백 생성 오류 발생: {e}")
+        return "죄송합니다. 피드백을 생성하는 중 오류가 발생했습니다."

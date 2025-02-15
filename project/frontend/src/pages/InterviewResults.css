@@ -1,0 +1,69 @@
+/* 전체 결과 페이지 */
+.results-container {
+    width: 100%;
+    min-height: 100vh;
+    color: white;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* 제목 */
+  .results-container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    color : black;
+  }
+  
+  /* 피드백 박스 */
+  .feedback-box {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* 대화 기록 */
+  .conversation-box {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+  }
+  
+  /* 각 메시지 스타일 */
+  .user-msg {
+    font-weight: bold;
+    color: blue;
+  }
+  
+  .bot-msg {
+    font-weight: bold;
+    color: green;
+  }
+  
+  /* 돌아가기 버튼 */
+  .back-button {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    background: #38bdf8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .back-button:hover {
+    background: #0284c7;
+  }
+  
