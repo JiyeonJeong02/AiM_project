@@ -5,10 +5,12 @@ import Home from "./pages/Home";
 import Interview from "./pages/Interview";
 import Results from "./pages/Results";
 import Settings from "./pages/Settings";
-import "./App.css"; // 스타일 적용
 import StartInterview from "./pages/StartInterview";
 import InterviewStart from "./pages/InterviewStart";
 import InterviewSession from "./pages/InterviewSession";
+import InterviewResults from "./pages/InterviewResults"; // 새로 추가
+
+import "./App.css"; // 스타일 적용
 
 function App() {
   return (
@@ -23,9 +25,8 @@ function App() {
           <Route path="/start-interview" element={<StartInterview />} />
           <Route path="/interview-start" element={<InterviewStart />} />
           <Route path="/interview-session" element={<InterviewSession />} />
-          
+          <Route path="/interview-results" element={<InterviewResults />} /> {/* 새 결과 페이지 */}
         </Routes>
-        
       </div>
     </Router>
   );

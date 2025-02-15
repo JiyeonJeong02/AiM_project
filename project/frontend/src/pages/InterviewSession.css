@@ -13,7 +13,6 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 20px;
 }
 
 .interview-header h1 {
@@ -137,4 +136,12 @@ video {
   .chat-box {
     height: 300px;
   }
+}
+
+.question-progress {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #060502;  /* 눈에 띄는 색상 (노란색 계열) */
+  text-align: left;
+  align-self: flex-end; /* 오른쪽 끝으로 정렬 */
 }

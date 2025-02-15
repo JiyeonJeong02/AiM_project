@@ -6,6 +6,7 @@ from app.databases import database, ncs_code   # 데이터베이스 및 테이�
 from app.schema import NCSCode, UserAnswer, InterviewRequest   # Pydantic 모델 임포트
 from app.elasticsearch import es_client
 from app.ChatGPTService import get_interview_response
+from app.ChatGPTService import get_interview_response, get_interview_feedback
 
 app = FastAPI()
 
@@ -67,5 +68,16 @@ async def interview_endpoint(request: InterviewRequest):
         return {"response": interview_response}
     except Exception as e:
         print(f"❌ 서버 오류: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+    
+
+@app.post("/interview-feedback")
+async def interview_feedback_endpoint(request: dict):
+    try:
+        conversation_text = request.get("conversation", "")
+        feedback = await get_interview_feedback(conversation_text)
+        return {"feedback": feedback}
+    except Exception as e:
+        print(f"❌ 피드백 오류: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 

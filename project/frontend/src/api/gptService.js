@@ -13,3 +13,16 @@ export const getInterviewResponse = async (userAnswer, companyname, subcategory)
     throw error;
   }
 };
+
+
+export const getInterviewFeedback = async (conversationText) => {
+  try {
+    const response = await axios.post("http://localhost:8000/interview-feedback", {
+      conversation: conversationText,
+    });
+    return response.data.feedback;
+  } catch (error) {
+    console.error("FastAPI 피드백 받기 오류:", error);
+    throw error;
+  }
+};
