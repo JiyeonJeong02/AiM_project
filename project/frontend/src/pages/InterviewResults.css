@@ -50,10 +50,9 @@
   
   /* 돌아가기 버튼 */
   .back-button {
-    display: block;
-    margin: 0 auto;
-    padding: 12px 24px;
-    font-size: 1rem;
+    margin-left: 32%;
+    padding: 14px 30px;
+    font-size: 1.1rem;
     font-weight: bold;
     background: #38bdf8;
     color: white;
@@ -66,4 +65,24 @@
   .back-button:hover {
     background: #0284c7;
   }
+
+  
+  .download-button {
+    padding: 12px 20px;       /* 버튼 내부 여백을 키워서 크기 증가 */
+    font-size: 0.9rem;        /* 글자 크기 증가 */
+    font-weight: 1000;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  
+  .download-button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-3px);
+  }
+  
+  
   
