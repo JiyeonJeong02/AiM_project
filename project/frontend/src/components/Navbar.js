@@ -11,9 +11,8 @@ const Navbar = () => {
       </h1>
       <ul>
         <li><Link to="/">홈</Link></li>
+        <li><Link to="/Company-info">기업 분석</Link></li>
         <li><Link to="/interview">면접 시작</Link></li>
-        <li><Link to="/results">면접 결과</Link></li>
-        <li><Link to="/settings">설정</Link></li>
       </ul>
     </nav>
   );

@@ -1,10 +1,10 @@
-/* CompanyInfo.css */
 .company-info-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 40px 20px;
     min-height: 100vh;
+    background: #f5f7fa; /* 전체 배경 변경 */
   }
   
   .company-info-title {
@@ -59,27 +59,42 @@
     color: red;
   }
   
+  /* 기업 개요 카드 */
   .overview-card {
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    max-width: 600px;
+    max-width: 900px;
     width: 100%;
     color: #102a43;
     text-align: left;
+    margin-top: 20px;
   }
   
-  .overview-card h2 {
+  .overview-card-title {
     margin-top: 0;
-    font-size: 1.8rem;
+    font-size: 2.0rem;
     font-weight: 700;
     color: #334e68;
+    margin-bottom: 16px;
   }
   
-  .overview-card p {
-    font-size: 1rem;
+  /* 각 섹션(0,1,2,3) */
+  .overview-section {
+    margin-bottom: 20px;
+  }
+  
+  .overview-section-heading {
+    font-size: 1.4rem; /* 굵고 크게 */
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #102a43;
+  }
+  
+  .overview-section-content {
+    font-size: 1.1rem;
     line-height: 1.6;
-    margin-top: 10px;
+    color: #020a11;
   }
   
