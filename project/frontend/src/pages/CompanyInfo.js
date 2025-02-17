@@ -47,7 +47,7 @@ const CompanyInfo = () => {
     setOverviewSections([]); // 초기화
     try {
       const response = await axios.get(
-        `http://${HOST_IP}:8000/business_overview?company_name=${encodeURIComponent(
+        `${HOST_IP}:8000/business_overview?company_name=${encodeURIComponent(
           companyName
         )}`
       );
