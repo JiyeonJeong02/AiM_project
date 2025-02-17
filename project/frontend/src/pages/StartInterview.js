@@ -15,7 +15,7 @@ const StartInterview = () => {
   const fetchSuggestions = async (query) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
+        `http://host.docker.internal:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
       );
       if (response.ok) {
         const data = await response.json();
