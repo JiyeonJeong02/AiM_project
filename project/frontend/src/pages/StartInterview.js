@@ -13,12 +13,12 @@ const StartInterview = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
 
-  
+
   // API 호출: 검색어(query)를 포함하여 ncs_code에서 ncsSubdCdNm 검색
   const fetchSuggestions = async (query) => {
     try {
       const response = await fetch(
-        `http://${HOST_IP}:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
+        `https://${HOST_IP}:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -67,7 +67,7 @@ const handleConfirm = () => {
 };
 
 
-  
+
 
   // 글자 수 2자 이상일 때 자동 검색 (원하는 경우 유지)
   useEffect(() => {
