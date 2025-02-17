@@ -29,4 +29,5 @@ services:
       - 8000:8000
     volumes:
       - ./backend:/workspace
-    command: uvicorn app.main:app --host 0.0.0.0 --reload --log-level debug
+    # command: uvicorn app.main:app --host 0.0.0.0 --reload --log-level debug
+    command: uvicorn app.main:app --host 0.0.0.0 --reload --log-level debug --ssl-keyfile=./privkey.pem --ssl-certfile=./fullchain.pem
