@@ -18,7 +18,7 @@ const StartInterview = () => {
   const fetchSuggestions = async (query) => {
     try {
       const response = await fetch(
-        `${HOST_IP}:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
+        `http://${HOST_IP}:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
       );
       if (response.ok) {
         const data = await response.json();
