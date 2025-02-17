@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./CompanyInfo.css";
 
+const HOST_IP = process.env.REACT_APP_HOST_IP;
+
 const CompanyInfo = () => {
   const [companyName, setCompanyName] = useState("");
   const [overviewSections, setOverviewSections] = useState([]);
@@ -45,7 +47,7 @@ const CompanyInfo = () => {
     setOverviewSections([]); // 초기화
     try {
       const response = await axios.get(
-        `http://host.docker.internal:8000/business_overview?company_name=${encodeURIComponent(
+        `http://${HOST_IP}:8000/business_overview?company_name=${encodeURIComponent(
           companyName
         )}`
       );

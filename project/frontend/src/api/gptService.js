@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const HOST_IP = process.env.REACT_APP_HOST_IP;
+
 export const getInterviewResponse = async (userAnswer, companyname, subcategory) => {
   try {
-    const response = await axios.post("http://host.docker.internal:8000/interview", {
+    const response = await axios.post(`http://${HOST_IP}:8000/interview`, {
       answer: String(userAnswer),
       companyname: String(companyname),
       subcategory: String(subcategory),
@@ -17,7 +19,7 @@ export const getInterviewResponse = async (userAnswer, companyname, subcategory)
 
 export const getInterviewFeedback = async (conversationText) => {
   try {
-    const response = await axios.post("http://host.docker.internal:8000/interview-feedback", {
+    const response = await axios.post(`http://${HOST_IP}:8000/interview-feedback`, {
       conversation: conversationText,
     });
     return response.data.feedback;
