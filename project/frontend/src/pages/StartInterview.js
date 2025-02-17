@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./StartInterview.css";
 
+const HOST_IP = process.env.REACT_APP_HOST_IP;
+
 const StartInterview = () => {
   const [title, setTitle] = useState("");
   const [company, setCompany] = useState("");
@@ -11,11 +13,12 @@ const StartInterview = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
 
+  
   // API 호출: 검색어(query)를 포함하여 ncs_code에서 ncsSubdCdNm 검색
   const fetchSuggestions = async (query) => {
     try {
       const response = await fetch(
-        `http://host.docker.internal:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
+        `http://${HOST_IP}:8000/api/ncs-codes?search=${encodeURIComponent(query)}`
       );
       if (response.ok) {
         const data = await response.json();
