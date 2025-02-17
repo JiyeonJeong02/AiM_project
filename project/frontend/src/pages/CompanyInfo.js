@@ -45,7 +45,7 @@ const CompanyInfo = () => {
     setOverviewSections([]); // 초기화
     try {
       const response = await axios.get(
-        `http://localhost:8000/business_overview?company_name=${encodeURIComponent(
+        `http://host.docker.internal:8000/business_overview?company_name=${encodeURIComponent(
           companyName
         )}`
       );
