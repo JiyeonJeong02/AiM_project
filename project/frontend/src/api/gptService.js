@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getInterviewResponse = async (userAnswer, companyname, subcategory) => {
   try {
-    const response = await axios.post("http://localhost:8000/interview", {
+    const response = await axios.post("http://host.docker.internal:8000/interview", {
       answer: String(userAnswer),
       companyname: String(companyname),
       subcategory: String(subcategory),
@@ -17,7 +17,7 @@ export const getInterviewResponse = async (userAnswer, companyname, subcategory)
 
 export const getInterviewFeedback = async (conversationText) => {
   try {
-    const response = await axios.post("http://localhost:8000/interview-feedback", {
+    const response = await axios.post("http://host.docker.internal:8000/interview-feedback", {
       conversation: conversationText,
     });
     return response.data.feedback;
